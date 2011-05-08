@@ -30,6 +30,7 @@
 		147A4EA11376F5DE00732B67 /* libopencv_video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E971376F5DD00732B67 /* libopencv_video.a */; };
 		147A4EA71376F7FE00732B67 /* QuartzHelpLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */; };
 		147A4EAC1376FC0200732B67 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4EAB1376FC0200732B67 /* test.m */; };
+		147A4EB01376FC4000732B67 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 147A4EAE1376FC4000732B67 /* MainWindow-iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuartzHelpLibrary.m; path = "../Quartz-Help-Library/QuartzHelpLibrary.m"; sourceTree = "<group>"; };
 		147A4EAA1376FC0200732B67 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		147A4EAB1376FC0200732B67 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
+		147A4EAF1376FC4000732B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				147A4EAD1376FC3F00732B67 /* iPad */,
 				147A4EAA1376FC0200732B67 /* test.h */,
 				147A4EAB1376FC0200732B67 /* test.m */,
 				141B71FF1376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.h */,
@@ -174,6 +177,14 @@
 				147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */,
 			);
 			name = "Quartz Help Library";
+			sourceTree = "<group>";
+		};
+		147A4EAD1376FC3F00732B67 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				147A4EAE1376FC4000732B67 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +237,7 @@
 				141B71FB1376E2A5008278A1 /* InfoPlist.strings in Resources */,
 				141B72041376E2A5008278A1 /* MainWindow.xib in Resources */,
 				141B720A1376E2A5008278A1 /* OpenCVHelpLibraryViewController.xib in Resources */,
+				147A4EB01376FC4000732B67 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +282,14 @@
 				141B72091376E2A5008278A1 /* en */,
 			);
 			name = OpenCVHelpLibraryViewController.xib;
+			sourceTree = "<group>";
+		};
+		147A4EAE1376FC4000732B67 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				147A4EAF1376FC4000732B67 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -317,6 +337,7 @@
 				GCC_PREFIX_HEADER = "OpenCVHelpLibrary/OpenCVHelpLibrary-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../iOS_OpenCV_build_script/build/include/**";
 				INFOPLIST_FILE = "OpenCVHelpLibrary/OpenCVHelpLibrary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../iOS_OpenCV_build_script/build/lib\"",
@@ -326,6 +347,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -339,6 +361,7 @@
 				GCC_PREFIX_HEADER = "OpenCVHelpLibrary/OpenCVHelpLibrary-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../iOS_OpenCV_build_script/build/include/**";
 				INFOPLIST_FILE = "OpenCVHelpLibrary/OpenCVHelpLibrary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../iOS_OpenCV_build_script/build/lib\"",
@@ -348,6 +371,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
