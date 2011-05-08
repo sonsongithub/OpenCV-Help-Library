@@ -1,0 +1,1 @@
+OpenCV Help Library=======Blog======= * [sonson.jp][]Sorry, Japanese only....Dependency======= * none [Quartz Help Library]: https://github.com/sonsongithub/Quartz-Help-Library[sonson.jp]: http://sonson.jp
