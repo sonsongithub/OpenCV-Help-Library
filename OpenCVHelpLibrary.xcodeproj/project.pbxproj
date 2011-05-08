@@ -29,6 +29,7 @@
 		147A4EA01376F5DE00732B67 /* libopencv_objdetect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E961376F5DD00732B67 /* libopencv_objdetect.a */; };
 		147A4EA11376F5DE00732B67 /* libopencv_video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E971376F5DD00732B67 /* libopencv_video.a */; };
 		147A4EA71376F7FE00732B67 /* QuartzHelpLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */; };
+		147A4EAC1376FC0200732B67 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4EAB1376FC0200732B67 /* test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,8 @@
 		147A4E971376F5DD00732B67 /* libopencv_video.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_video.a; path = ../iOS_OpenCV_build_script/build/lib/libopencv_video.a; sourceTree = "<group>"; };
 		147A4EA31376F7FE00732B67 /* QuartzHelpLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuartzHelpLibrary.h; path = "../Quartz-Help-Library/QuartzHelpLibrary.h"; sourceTree = "<group>"; };
 		147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuartzHelpLibrary.m; path = "../Quartz-Help-Library/QuartzHelpLibrary.m"; sourceTree = "<group>"; };
+		147A4EAA1376FC0200732B67 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		147A4EAB1376FC0200732B67 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 		141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				147A4EAA1376FC0200732B67 /* test.h */,
+				147A4EAB1376FC0200732B67 /* test.m */,
 				141B71FF1376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.h */,
 				141B72001376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.m */,
 				141B72021376E2A5008278A1 /* MainWindow.xib */,
@@ -236,6 +241,7 @@
 				141B72071376E2A5008278A1 /* OpenCVHelpLibraryViewController.m in Sources */,
 				147A4E891376F57D00732B67 /* OpenCVHelpLibrary.m in Sources */,
 				147A4EA71376F7FE00732B67 /* QuartzHelpLibrary.m in Sources */,
+				147A4EAC1376FC0200732B67 /* test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
