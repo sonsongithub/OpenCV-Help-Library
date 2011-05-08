@@ -29,3 +29,44 @@
  */
 
 #import "test.h"
+
+void testInCaseSourceIsGrayBuffer() {
+	
+	// original pixel data
+	int originalWidth = 32;
+	int originalHeight = 32;
+	unsigned char* original = (unsigned char*)malloc(sizeof(unsigned char) * originalWidth * originalHeight);
+	
+	// make test pattern
+	for (int y = 0; y < originalHeight; y++) {
+		for (int x = 0; x < originalWidth; x++) {
+			if (y <= originalHeight / 2 && x <= originalWidth / 2) {
+				original[y * originalWidth + x] = 0;
+			}
+			if (y <= originalHeight / 2 && x > originalWidth / 2) {
+				original[y * originalWidth + x] = 85;
+			}
+			if (y > originalHeight / 2 && x <= originalWidth / 2) {
+				original[y * originalWidth + x] = 170;
+			}
+			if (y > originalHeight / 2 && x > originalWidth / 2) {
+				original[y * originalWidth + x] = 255;
+			}
+		}
+	}
+	
+	// Convert to IplImage(Gray)
+	
+	// Convert to CGImageRef from IplImage
+	
+	// Convert to UIImage from IplImage
+	
+	// Convert to IplImage(Gray) from CGImageRef
+	
+	// Convert to IplImage(Gray) from UIImage
+	
+}
+
+void test() {
+	
+}

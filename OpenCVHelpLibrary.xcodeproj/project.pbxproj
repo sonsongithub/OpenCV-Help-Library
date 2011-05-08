@@ -128,7 +128,6 @@
 		141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				147A4EAD1376FC3F00732B67 /* iPad */,
 				147A4EAA1376FC0200732B67 /* test.h */,
 				147A4EAB1376FC0200732B67 /* test.m */,
 				141B71FF1376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.h */,
@@ -137,6 +136,7 @@
 				141B72051376E2A5008278A1 /* OpenCVHelpLibraryViewController.h */,
 				141B72061376E2A5008278A1 /* OpenCVHelpLibraryViewController.m */,
 				141B72081376E2A5008278A1 /* OpenCVHelpLibraryViewController.xib */,
+				147A4EAD1376FC3F00732B67 /* iPad */,
 				141B71F71376E2A5008278A1 /* Supporting Files */,
 			);
 			path = OpenCVHelpLibrary;
