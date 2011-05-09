@@ -36,7 +36,8 @@
 @implementation UIImage(OpenCV)
 
 - (IplImage*)createIplImage {
-	return NULL;
+	IplImage *output = CGCreateIplImageWithCGImage(self.CGImage);
+	return output;
 }
 
 + (UIImage*)imageWithIplImage:(IplImage*)inputImage {

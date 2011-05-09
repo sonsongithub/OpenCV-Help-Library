@@ -136,13 +136,22 @@ void testInCaseSourceIsGrayBuffer() {
 	// Convert to CGImageRef from IplImage
 	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
 	
+	// Convert to IplImage(RGB) from CGImageRef
+	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
+	
+	// confirm
+	if (compareIplImage(duplicatedFromCGImage, originalSourceImage, 1)) {
+		printf("OK\n");
+	}
+	
 	// Convert to UIImage from IplImage
 	UIImage *uiimage = [UIImage imageWithIplImage:originalSourceImage];
 	
-	// Convert to IplImage(Gray) from CGImageRef
-	IplImage *duplicated = CGCreateIplImageWithCGImage(p);
+	// Convert to IplImage(RGB) from CGImageRef
+	IplImage *duplicatedFromUIImage =[uiimage createIplImage];
 	
-	if (compareIplImage(duplicated, originalSourceImage, 1)) {
+	// confirm
+	if (compareIplImage(duplicatedFromUIImage, originalSourceImage, 1)) {
 		printf("OK\n");
 	}
 }
@@ -188,18 +197,25 @@ void testInCaseSourceIsRGBBuffer() {
 		memcpy(destination, source, sizeof(unsigned char) * originalWidth * 3);
 	}
 	
-	dumpIplImage(originalSourceImage);
-	
 	// Convert to CGImageRef from IplImage
 	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
+	
+	// Convert to IplImage(RGB) from CGImageRef
+	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
+	
+	// confirm
+	if (compareIplImage(duplicatedFromCGImage, originalSourceImage, 1)) {
+		printf("OK\n");
+	}
 	
 	// Convert to UIImage from IplImage
 	UIImage *uiimage = [UIImage imageWithIplImage:originalSourceImage];
 	
 	// Convert to IplImage(RGB) from CGImageRef
-	IplImage *duplicated = CGCreateIplImageWithCGImage(p);
+	IplImage *duplicatedFromUIImage =[uiimage createIplImage];
 	
-	if (compareIplImage(duplicated, originalSourceImage, 1)) {
+	// confirm
+	if (compareIplImage(duplicatedFromUIImage, originalSourceImage, 1)) {
 		printf("OK\n");
 	}
 }
