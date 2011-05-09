@@ -3191,8 +3191,8 @@
 		</dict>
 		<string>IDEDeviceLocation</string>
 		<string>IDEDeviceArchitecture</string>
-		<string>dvtdevice-iphone:d6b3c7732f0e31a17eae7c826ddeba13917258b7</string>
-		<string>armv7</string>
+		<string>dvtdevice-iphonesimulator:/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk-iPad</string>
+		<string>i386</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3504,7 +3504,7 @@
 				<integer>304</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>326647970.347565</real>
+			<real>326648093.59709603</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -3515,7 +3515,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 0:32</string>
+		<string>Today at 0:34</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
@@ -3841,7 +3841,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{559, 192}, {1348, 1146}}</string>
+		<string>{{561, 190}, {1348, 1146}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
