@@ -32,6 +32,13 @@
 		147A4EB01376FC4000732B67 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 147A4EAE1376FC4000732B67 /* MainWindow-iPad.xib */; };
 		14D85E8913783871004837F8 /* testImageGrayScale.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E8713783871004837F8 /* testImageGrayScale.jpg */; };
 		14D85E8A13783871004837F8 /* testImageRGB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E8813783871004837F8 /* testImageRGB.jpg */; };
+		14D85E9D1378405E004837F8 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E961378405E004837F8 /* Default-Landscape.png */; };
+		14D85E9E1378405E004837F8 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E971378405E004837F8 /* Default-Portrait.png */; };
+		14D85E9F1378405E004837F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E981378405E004837F8 /* Default.png */; };
+		14D85EA01378405E004837F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E991378405E004837F8 /* Default@2x.png */; };
+		14D85EA11378405E004837F8 /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E9A1378405E004837F8 /* icon114x114.png */; };
+		14D85EA21378405E004837F8 /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E9B1378405E004837F8 /* icon57x57.png */; };
+		14D85EA31378405E004837F8 /* icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E9C1378405E004837F8 /* icon72x72.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +74,13 @@
 		147A4EAF1376FC4000732B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		14D85E8713783871004837F8 /* testImageGrayScale.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImageGrayScale.jpg; sourceTree = "<group>"; };
 		14D85E8813783871004837F8 /* testImageRGB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImageRGB.jpg; sourceTree = "<group>"; };
+		14D85E961378405E004837F8 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		14D85E971378405E004837F8 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		14D85E981378405E004837F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		14D85E991378405E004837F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		14D85E9A1378405E004837F8 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
+		14D85E9B1378405E004837F8 /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
+		14D85E9C1378405E004837F8 /* icon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72x72.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +114,7 @@
 				147A4E871376F57D00732B67 /* OpenCVHelpLibrary.h */,
 				147A4E881376F57D00732B67 /* OpenCVHelpLibrary.m */,
 				141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */,
+				14D85E941378405E004837F8 /* Resources */,
 				147A4E8B1376F5B500732B67 /* Libraries */,
 				141B71EF1376E2A4008278A1 /* Frameworks */,
 				141B71ED1376E2A4008278A1 /* Products */,
@@ -180,6 +195,29 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
+		14D85E941378405E004837F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				14D85E951378405E004837F8 /* image */,
+			);
+			name = Resources;
+			path = OpenCVHelpLibrary/Resources;
+			sourceTree = "<group>";
+		};
+		14D85E951378405E004837F8 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				14D85E961378405E004837F8 /* Default-Landscape.png */,
+				14D85E971378405E004837F8 /* Default-Portrait.png */,
+				14D85E981378405E004837F8 /* Default.png */,
+				14D85E991378405E004837F8 /* Default@2x.png */,
+				14D85E9A1378405E004837F8 /* icon114x114.png */,
+				14D85E9B1378405E004837F8 /* icon57x57.png */,
+				14D85E9C1378405E004837F8 /* icon72x72.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,6 +271,13 @@
 				147A4EB01376FC4000732B67 /* MainWindow-iPad.xib in Resources */,
 				14D85E8913783871004837F8 /* testImageGrayScale.jpg in Resources */,
 				14D85E8A13783871004837F8 /* testImageRGB.jpg in Resources */,
+				14D85E9D1378405E004837F8 /* Default-Landscape.png in Resources */,
+				14D85E9E1378405E004837F8 /* Default-Portrait.png in Resources */,
+				14D85E9F1378405E004837F8 /* Default.png in Resources */,
+				14D85EA01378405E004837F8 /* Default@2x.png in Resources */,
+				14D85EA11378405E004837F8 /* icon114x114.png in Resources */,
+				14D85EA21378405E004837F8 /* icon57x57.png in Resources */,
+				14D85EA31378405E004837F8 /* icon72x72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
