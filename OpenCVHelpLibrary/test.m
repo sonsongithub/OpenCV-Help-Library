@@ -140,10 +140,11 @@ void testInCaseSourceIsGrayBuffer() {
 	UIImage *uiimage = [UIImage imageWithIplImage:originalSourceImage];
 	
 	// Convert to IplImage(Gray) from CGImageRef
+	IplImage *duplicated = CGCreateIplImageWithCGImage(p);
 	
-	// Convert to IplImage(Gray) from UIImage
-	
-//	compareIplImage(IplImage *image1, IplImage *image2, int tolerance);
+	if (compareIplImage(duplicated, originalSourceImage, 1)) {
+		printf("OK\n");
+	}
 }
 
 void testInCaseSourceIsRGBBuffer() {
@@ -190,16 +191,17 @@ void testInCaseSourceIsRGBBuffer() {
 	dumpIplImage(originalSourceImage);
 	
 	// Convert to CGImageRef from IplImage
-	CGImageRef cgimageRef = CGCreateImageWithIplImage(originalSourceImage);
+	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
 	
 	// Convert to UIImage from IplImage
 	UIImage *uiimage = [UIImage imageWithIplImage:originalSourceImage];
 	
 	// Convert to IplImage(RGB) from CGImageRef
+	IplImage *duplicated = CGCreateIplImageWithCGImage(p);
 	
-	// Convert to IplImage(RGB) from UIImage
-	
-//	compareIplImage(IplImage *image1, IplImage *image2, int tolerance);	
+	if (compareIplImage(duplicated, originalSourceImage, 1)) {
+		printf("OK\n");
+	}
 }
 
 void test() {

@@ -50,27 +50,187 @@
 @end
 
 IplImage* CGCreateIplImageWithGrayScaleCGImage(CGImageRef imageRef) {
-	return NULL;
+	
+	int inputImageWidth = CGImageGetWidth(imageRef);
+	int inputImageHeight = CGImageGetHeight(imageRef);
+	
+	IplImage* targetImage = cvCreateImage(cvSize(inputImageWidth, inputImageHeight), IPL_DEPTH_8U, 1);
+	
+	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
+	size_t bytesPerRow_imageRef = CGImageGetBytesPerRow(imageRef);
+	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
+	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
+	
+	CGDataProviderRef inputImageProvider = CGImageGetDataProvider(imageRef);
+	
+	CFDataRef data = CGDataProviderCopyData(inputImageProvider);
+	
+	unsigned char *pixelData = (unsigned char *) CFDataGetBytePtr(data);
+	
+	for (int y = 0; y < inputImageHeight; y++) {
+		for (int x = 0; x < inputImageWidth; x++) {
+			int offset = y * bytesPerRow_imageRef + x * bytesPerPixel;
+			targetImage->imageData[y * targetImage->widthStep + x] = pixelData[offset];
+		}
+	}
+	
+	CFRelease(data);
+	
+	return targetImage;
 }
 
 IplImage* CGCreateIplImageWithGrayAlphaScaleCGImage(CGImageRef imageRef) {
-	return NULL;
+	
+	int inputImageWidth = CGImageGetWidth(imageRef);
+	int inputImageHeight = CGImageGetHeight(imageRef);
+	
+	IplImage* targetImage = cvCreateImage(cvSize(inputImageWidth, inputImageHeight), IPL_DEPTH_8U, 1);
+	
+	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
+	size_t bytesPerRow_imageRef = CGImageGetBytesPerRow(imageRef);
+	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
+	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
+	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
+	
+	CGDataProviderRef inputImageProvider = CGImageGetDataProvider(imageRef);
+	
+	CFDataRef data = CGDataProviderCopyData(inputImageProvider);
+	
+	unsigned char *pixelData = (unsigned char *) CFDataGetBytePtr(data);
+	
+	if (bitmapAlphaInfo == kCGImageAlphaFirst) {
+		for (int y = 0; y < inputImageHeight; y++) {
+			for (int x = 0; x < inputImageWidth; x++) {
+				int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 1;
+				targetImage->imageData[y * targetImage->widthStep + x] = pixelData[offset];
+			}
+		}
+	}
+	else if (bitmapAlphaInfo == kCGImageAlphaLast) {
+		for (int y = 0; y < inputImageHeight; y++) {
+			for (int x = 0; x < inputImageWidth; x++) {
+				int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 0;
+				targetImage->imageData[y * targetImage->widthStep + x] = pixelData[offset];
+			}
+		}
+	}
+	else if (bitmapAlphaInfo == kCGImageAlphaPremultipliedFirst) {
+		for (int y = 0; y < inputImageHeight; y++) {
+			for (int x = 0; x < inputImageWidth; x++) {
+				int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 1;
+				targetImage->imageData[y * targetImage->widthStep + x] = pixelData[offset];
+			}
+		}
+	}
+	else if (bitmapAlphaInfo == kCGImageAlphaPremultipliedLast) {
+		for (int y = 0; y < inputImageHeight; y++) {
+			for (int x = 0; x < inputImageWidth; x++) {
+				int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 0;
+				targetImage->imageData[y * targetImage->widthStep + x] = pixelData[offset];
+			}
+		}
+	}
+	
+	CFRelease(data);
+	
+	return targetImage;
 }
 
 IplImage* CGCreateIplImageWithRGBScaleCGImage(CGImageRef imageRef) {
-	return NULL;
+	int inputImageWidth = CGImageGetWidth(imageRef);
+	int inputImageHeight = CGImageGetHeight(imageRef);
+	
+	IplImage* targetImage = cvCreateImage(cvSize(inputImageWidth, inputImageHeight), IPL_DEPTH_8U, 3);
+	
+	size_t bytesPerRow_imageRef = CGImageGetBytesPerRow(imageRef);
+	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
+	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
+	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
+	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
+	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
+	
+	CGDataProviderRef inputImageProvider = CGImageGetDataProvider(imageRef);
+	
+	CFDataRef data = CGDataProviderCopyData(inputImageProvider);
+	
+	unsigned char *pixelData = (unsigned char *) CFDataGetBytePtr(data);
+	
+	if (bitmapAlphaInfo != kCGImageAlphaNone) 
+		return NULL;
+	
+	if (byteOrderInfo != kCGBitmapByteOrder32Big)
+		return NULL;
+	
+	for (int y = 0; y < inputImageHeight; y++) {
+		for (int x = 0; x < inputImageWidth; x++) {
+			int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 0;
+			targetImage->imageData[y * targetImage->widthStep + 3 * x + 0] = pixelData[offset + 0];
+			targetImage->imageData[y * targetImage->widthStep + 3 * x + 1] = pixelData[offset + 1];
+			targetImage->imageData[y * targetImage->widthStep + 3 * x + 2] = pixelData[offset + 2];
+		}
+	}
+	
+	return targetImage;
 }
 
 IplImage* CGCreateIplImageWithRGBAScaleCGImage(CGImageRef imageRef) {
-	return NULL;
+	
+	int inputImageWidth = CGImageGetWidth(imageRef);
+	int inputImageHeight = CGImageGetHeight(imageRef);
+	
+	IplImage* targetImage = cvCreateImage(cvSize(inputImageWidth, inputImageHeight), IPL_DEPTH_8U, 3);
+	
+	size_t bytesPerRow_imageRef = CGImageGetBytesPerRow(imageRef);
+	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
+	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
+	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
+	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
+	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
+	
+	CGDataProviderRef inputImageProvider = CGImageGetDataProvider(imageRef);
+	
+	CFDataRef data = CGDataProviderCopyData(inputImageProvider);
+	
+	unsigned char *pixelData = (unsigned char *) CFDataGetBytePtr(data);
+	
+	if (bitmapAlphaInfo == kCGImageAlphaNone) 
+		return NULL;
+	
+	if (byteOrderInfo != kCGBitmapByteOrder32Big)
+		return NULL;
+	
+	if (bitmapAlphaInfo == kCGImageAlphaFirst || bitmapAlphaInfo == kCGImageAlphaPremultipliedFirst || bitmapAlphaInfo == kCGImageAlphaNoneSkipFirst) {
+		for (int y = 0; y < inputImageHeight; y++) {
+			for (int x = 0; x < inputImageWidth; x++) {
+				int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 0;
+				targetImage->imageData[y * targetImage->widthStep + 3 * x + 0] = pixelData[offset + 1];
+				targetImage->imageData[y * targetImage->widthStep + 3 * x + 1] = pixelData[offset + 2];
+				targetImage->imageData[y * targetImage->widthStep + 3 * x + 2] = pixelData[offset + 3];
+			}
+		}
+	}
+	else if (bitmapAlphaInfo == kCGImageAlphaLast || bitmapAlphaInfo == kCGImageAlphaPremultipliedLast || bitmapAlphaInfo == kCGImageAlphaNoneSkipLast) {
+		for (int y = 0; y < inputImageHeight; y++) {
+			for (int x = 0; x < inputImageWidth; x++) {
+				int offset = y * bytesPerRow_imageRef + x * bytesPerPixel + 0;
+				targetImage->imageData[y * targetImage->widthStep + 3 * x + 0] = pixelData[offset + 0];
+				targetImage->imageData[y * targetImage->widthStep + 3 * x + 1] = pixelData[offset + 1];
+				targetImage->imageData[y * targetImage->widthStep + 3 * x + 2] = pixelData[offset + 2];
+			}
+		}
+	}
+	
+	return targetImage;
 }
 
 IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
-	// size_t bytesPerRow_imageRef = CGImageGetBytesPerRow(imageRef);
 	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
 	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
 	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
 	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
 	
@@ -82,6 +242,13 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	if (bitmapInfo == kCGBitmapFloatComponents) {
 		printf("unsupported image file\n");
 		return NULL;
+	}
+	
+	if (bytesPerPixel == 4) {
+		if (byteOrderInfo != kCGBitmapByteOrder32Big && byteOrderInfo != kCGBitmapByteOrderDefault) {
+			printf("unsupported image file\n");
+			return NULL;
+		}
 	}
 	
 	// RGBA, ARGB
