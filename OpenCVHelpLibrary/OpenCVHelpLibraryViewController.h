@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface OpenCVHelpLibraryViewController : UIViewController {
-    
+    IBOutlet UIImageView *leftOutputImageView;
+    IBOutlet UIImageView *rightOutputImageView;
 }
 
 @end

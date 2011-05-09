@@ -30,7 +30,6 @@
 
 #import "OpenCVHelpLibrary.h"
 
-#import "QuartzHelpLibrary.h"
 #import <opencv/cv.h>
 
 @implementation UIImage(OpenCV)

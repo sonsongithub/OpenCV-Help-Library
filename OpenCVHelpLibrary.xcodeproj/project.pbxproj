@@ -28,9 +28,10 @@
 		147A4E9F1376F5DE00732B67 /* libopencv_ml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E951376F5DD00732B67 /* libopencv_ml.a */; };
 		147A4EA01376F5DE00732B67 /* libopencv_objdetect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E961376F5DD00732B67 /* libopencv_objdetect.a */; };
 		147A4EA11376F5DE00732B67 /* libopencv_video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E971376F5DD00732B67 /* libopencv_video.a */; };
-		147A4EA71376F7FE00732B67 /* QuartzHelpLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */; };
 		147A4EAC1376FC0200732B67 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4EAB1376FC0200732B67 /* test.m */; };
 		147A4EB01376FC4000732B67 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 147A4EAE1376FC4000732B67 /* MainWindow-iPad.xib */; };
+		14D85E8913783871004837F8 /* testImageGrayScale.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E8713783871004837F8 /* testImageGrayScale.jpg */; };
+		14D85E8A13783871004837F8 /* testImageRGB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E8813783871004837F8 /* testImageRGB.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,11 +62,11 @@
 		147A4E951376F5DD00732B67 /* libopencv_ml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_ml.a; path = ../iOS_OpenCV_build_script/build/lib/libopencv_ml.a; sourceTree = "<group>"; };
 		147A4E961376F5DD00732B67 /* libopencv_objdetect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_objdetect.a; path = ../iOS_OpenCV_build_script/build/lib/libopencv_objdetect.a; sourceTree = "<group>"; };
 		147A4E971376F5DD00732B67 /* libopencv_video.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopencv_video.a; path = ../iOS_OpenCV_build_script/build/lib/libopencv_video.a; sourceTree = "<group>"; };
-		147A4EA31376F7FE00732B67 /* QuartzHelpLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuartzHelpLibrary.h; path = "../Quartz-Help-Library/QuartzHelpLibrary.h"; sourceTree = "<group>"; };
-		147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuartzHelpLibrary.m; path = "../Quartz-Help-Library/QuartzHelpLibrary.m"; sourceTree = "<group>"; };
 		147A4EAA1376FC0200732B67 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		147A4EAB1376FC0200732B67 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		147A4EAF1376FC4000732B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		14D85E8713783871004837F8 /* testImageGrayScale.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImageGrayScale.jpg; sourceTree = "<group>"; };
+		14D85E8813783871004837F8 /* testImageRGB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImageRGB.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +100,6 @@
 				147A4E871376F57D00732B67 /* OpenCVHelpLibrary.h */,
 				147A4E881376F57D00732B67 /* OpenCVHelpLibrary.m */,
 				141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */,
-				147A4EA21376F7DF00732B67 /* Quartz Help Library */,
 				147A4E8B1376F5B500732B67 /* Libraries */,
 				141B71EF1376E2A4008278A1 /* Frameworks */,
 				141B71ED1376E2A4008278A1 /* Products */,
@@ -128,14 +128,16 @@
 		141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				14D85E8713783871004837F8 /* testImageGrayScale.jpg */,
+				14D85E8813783871004837F8 /* testImageRGB.jpg */,
 				147A4EAA1376FC0200732B67 /* test.h */,
 				147A4EAB1376FC0200732B67 /* test.m */,
-				141B71FF1376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.h */,
-				141B72001376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.m */,
-				141B72021376E2A5008278A1 /* MainWindow.xib */,
 				141B72051376E2A5008278A1 /* OpenCVHelpLibraryViewController.h */,
 				141B72061376E2A5008278A1 /* OpenCVHelpLibraryViewController.m */,
 				141B72081376E2A5008278A1 /* OpenCVHelpLibraryViewController.xib */,
+				141B71FF1376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.h */,
+				141B72001376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.m */,
+				141B72021376E2A5008278A1 /* MainWindow.xib */,
 				147A4EAD1376FC3F00732B67 /* iPad */,
 				141B71F71376E2A5008278A1 /* Supporting Files */,
 			);
@@ -168,15 +170,6 @@
 				147A4E971376F5DD00732B67 /* libopencv_video.a */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		147A4EA21376F7DF00732B67 /* Quartz Help Library */ = {
-			isa = PBXGroup;
-			children = (
-				147A4EA31376F7FE00732B67 /* QuartzHelpLibrary.h */,
-				147A4EA41376F7FE00732B67 /* QuartzHelpLibrary.m */,
-			);
-			name = "Quartz Help Library";
 			sourceTree = "<group>";
 		};
 		147A4EAD1376FC3F00732B67 /* iPad */ = {
@@ -238,6 +231,8 @@
 				141B72041376E2A5008278A1 /* MainWindow.xib in Resources */,
 				141B720A1376E2A5008278A1 /* OpenCVHelpLibraryViewController.xib in Resources */,
 				147A4EB01376FC4000732B67 /* MainWindow-iPad.xib in Resources */,
+				14D85E8913783871004837F8 /* testImageGrayScale.jpg in Resources */,
+				14D85E8A13783871004837F8 /* testImageRGB.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +247,6 @@
 				141B72011376E2A5008278A1 /* OpenCVHelpLibraryAppDelegate.m in Sources */,
 				141B72071376E2A5008278A1 /* OpenCVHelpLibraryViewController.m in Sources */,
 				147A4E891376F57D00732B67 /* OpenCVHelpLibrary.m in Sources */,
-				147A4EA71376F7FE00732B67 /* QuartzHelpLibrary.m in Sources */,
 				147A4EAC1376FC0200732B67 /* test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

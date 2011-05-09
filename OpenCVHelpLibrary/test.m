@@ -113,6 +113,8 @@ void dumpIplImage(IplImage *image) {
 }
 
 void testInCaseSourceIsGrayBuffer() {
+	printf("\n");
+	printf("Test for pixel arrays(Gray scale) -> IplImage -> CGImage(UIImage) -> IplImage.\n");
 	
 	// original pixel data
 	int originalWidth = 32;
@@ -152,8 +154,12 @@ void testInCaseSourceIsGrayBuffer() {
 	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
 	
 	// confirm
+	printf("->Pixel arrays(Gray scale) -> IplImage -> CGImage -> IplImage.\n");
 	if (compareIplImage(duplicatedFromCGImage, originalSourceImage, 1)) {
-		printf("OK\n");
+		printf("->OK\n");
+	}
+	else {
+		printf("->Faild\n");
 	}
 	
 	// Convert to UIImage from IplImage
@@ -163,12 +169,18 @@ void testInCaseSourceIsGrayBuffer() {
 	IplImage *duplicatedFromUIImage =[uiimage createIplImage];
 	
 	// confirm
+	printf("->Pixel arrays(Gray scale) -> IplImage -> UIImage -> IplImage.\n");
 	if (compareIplImage(duplicatedFromUIImage, originalSourceImage, 1)) {
-		printf("OK\n");
+		printf("->OK\n");
+	}
+	else {
+		printf("->Faild\n");
 	}
 }
 
 void testInCaseSourceIsRGBBuffer() {
+	printf("\n");
+	printf("Test for pixel arrays(RGB) -> IplImage -> CGImage(UIImage) -> IplImage.\n");
 	
 	// original pixel data
 	int originalWidth = 32;
@@ -216,8 +228,12 @@ void testInCaseSourceIsRGBBuffer() {
 	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
 	
 	// confirm
+	printf("->Pixel arrays(RGB) -> IplImage -> CGImage -> IplImage.\n");
 	if (compareIplImage(duplicatedFromCGImage, originalSourceImage, 1)) {
-		printf("OK\n");
+		printf("->OK\n");
+	}
+	else {
+		printf("->Faild\n");
 	}
 	
 	// Convert to UIImage from IplImage
@@ -227,12 +243,24 @@ void testInCaseSourceIsRGBBuffer() {
 	IplImage *duplicatedFromUIImage =[uiimage createIplImage];
 	
 	// confirm
+	printf("->Pixel arrays(RGB) -> IplImage -> UIImage -> IplImage.\n");
 	if (compareIplImage(duplicatedFromUIImage, originalSourceImage, 1)) {
-		printf("OK\n");
+		printf("->OK\n");
+	}
+	else {
+		printf("->Faild\n");
 	}
 }
 
 void test() {
+	printf("OpenCV Help Library Test\n\n");
+	
+	printf("---------->test\n");
+	printf("- (IplImage*)createIplImage;\n");
+	printf("+ (UIImage*)imageWithIplImage:(IplImage*)inputImage;\n");
+	printf("IplImage* CGCreateIplImageWithCGImage(CGImageRef inputImageRef);\n");
+	printf("CGImageRef CGCreateImageWithIplImage(IplImage* inputImage);\n");
+	
 	testInCaseSourceIsGrayBuffer();
 	testInCaseSourceIsRGBBuffer();
 }
