@@ -31,6 +31,7 @@
 #import "OpenCVHelpLibrary.h"
 
 #import "QuartzHelpLibrary.h"
+#import <opencv/cv.h>
 
 @implementation UIImage(OpenCV)
 
@@ -39,15 +40,108 @@
 }
 
 + (UIImage*)imageWithIplImage:(IplImage*)inputImage {
-	return nil;
+	CGImageRef source = CGCreateImageWithIplImage(inputImage);
+	
+	UIImage *output = [UIImage imageWithCGImage:source];
+	CGImageRelease(source);
+	return output;
 }
 
 @end
 
-IplImage* CGCreateIplImageWithCGImage(CGImageRef inputImageRef) {
+IplImage* CGCreateIplImageWithGrayScaleCGImage(CGImageRef imageRef) {
+	return NULL;
+}
+
+IplImage* CGCreateIplImageWithGrayAlphaScaleCGImage(CGImageRef imageRef) {
+	return NULL;
+}
+
+IplImage* CGCreateIplImageWithRGBScaleCGImage(CGImageRef imageRef) {
+	return NULL;
+}
+
+IplImage* CGCreateIplImageWithRGBAScaleCGImage(CGImageRef imageRef) {
+	return NULL;
+}
+
+IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
+	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
+	// size_t bytesPerRow_imageRef = CGImageGetBytesPerRow(imageRef);
+	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
+	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
+	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
+	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
+	
+	if (bytesPerPixel != 1 && bytesPerPixel != 2 && bytesPerPixel != 3 && bytesPerPixel != 4) {
+		printf("unsupported image file\n");
+		return NULL;
+	}
+	
+	if (bitmapInfo == kCGBitmapFloatComponents) {
+		printf("unsupported image file\n");
+		return NULL;
+	}
+	
+	// RGBA, ARGB
+	if (bytesPerPixel == 4) {
+		return CGCreateIplImageWithRGBAScaleCGImage(imageRef);
+	}
+	
+	// RGB
+	if (bytesPerPixel == 3) {
+		return CGCreateIplImageWithRGBScaleCGImage(imageRef);
+	}
+	
+	// Gray + alpha
+	if (bytesPerPixel == 2) {
+		return CGCreateIplImageWithGrayAlphaScaleCGImage(imageRef);
+	}
+	
+	// Gray
+	if (bytesPerPixel == 1) {
+		return CGCreateIplImageWithGrayScaleCGImage(imageRef);
+	}
+	
 	return NULL;
 }
 
 CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
+	if (inputImage->depth != IPL_DEPTH_8U) {
+		printf("Not supported depth type.\n");
+		return NULL;
+	}
+	
+	if (inputImage->nChannels == 1) {
+		CGColorSpaceRef grayColorSpace = CGColorSpaceCreateDeviceGray();
+		CGContextRef context = CGBitmapContextCreate(inputImage->imageData, inputImage->width, inputImage->height, 8, inputImage->widthStep, grayColorSpace, kCGImageAlphaNone);
+		CGImageRef image = CGBitmapContextCreateImage(context);
+		CGColorSpaceRelease(grayColorSpace);
+		return image;
+	}
+	if (inputImage->nChannels == 3) {
+		CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+		
+		unsigned char *rgbPixel = (unsigned char*)malloc(sizeof(unsigned char) * inputImage->width * inputImage->height * 4);
+		
+		for (int y = 0; y < inputImage->height; y++) {
+			for (int x = 0; x < inputImage->width; x++) {
+				rgbPixel[y * inputImage->width * 4 + 4 * x + 0] = inputImage->imageData[y * inputImage->width * 3 + 3 * x + 0];
+				rgbPixel[y * inputImage->width * 4 + 4 * x + 1] = inputImage->imageData[y * inputImage->width * 3 + 3 * x + 1];
+				rgbPixel[y * inputImage->width * 4 + 4 * x + 2] = inputImage->imageData[y * inputImage->width * 3 + 3 * x + 2];
+			}
+		}
+		
+		CGContextRef context = CGBitmapContextCreate(rgbPixel, inputImage->width, inputImage->height, 8, inputImage->width * 4, rgbColorSpace, kCGImageAlphaNoneSkipLast | kCGBitmapByteOrder32Big);
+		CGImageRef image = CGBitmapContextCreateImage(context);
+		CGColorSpaceRelease(rgbColorSpace);
+		free(rgbPixel);
+		return image;
+	}
+	else {
+		printf("Not supported depth type.\n");
+		return NULL;
+	}	
 	return NULL;
 }

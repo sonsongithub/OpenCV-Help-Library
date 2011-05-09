@@ -29,3 +29,5 @@
  */
 
 #import <Foundation/Foundation.h>
+
+void test();

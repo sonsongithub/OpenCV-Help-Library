@@ -10,6 +10,8 @@
 
 #import "OpenCVHelpLibraryViewController.h"
 
+#import "test.h"
+
 @implementation OpenCVHelpLibraryAppDelegate
 
 
@@ -23,6 +25,9 @@
 	 
 	self.window.rootViewController = self.viewController;
 	[self.window makeKeyAndVisible];
+	
+	test();
+	
     return YES;
 }
 
