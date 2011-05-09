@@ -33,18 +33,29 @@
 #import "OpenCVHelpLibrary.h"
 
 int compareIplImage(IplImage *image1, IplImage *image2, int tolerance) {
-	if (image1->width != image2->width)
+	// check both image types
+	if (image1->width != image2->width) {
+		printf("Width not matched.\n");
 		return 0;
-	if (image1->height != image2->height)
+	}
+	if (image1->height != image2->height) {
+		printf("Height not matched.\n");
 		return 0;
-	if (image1->nChannels != image2->nChannels)
+	}
+	if (image1->nChannels != image2->nChannels) {
+		printf("Image channels not matched.\n");
 		return 0;
-	if (image1->depth != image2->depth)
+	}
+	if (image1->depth != image2->depth) {
+		printf("Image depth type not matched.\n");
 		return 0;
+	}
+	if (image1->nChannels != 1 && image1->nChannels !=3) {
+		printf("Not supported number of channels.\n");
+		return 0;
+	}
 	
-	if (image1->nChannels != 1 && image1->nChannels !=3)
-		return 0;
-	
+	// compare two pixel arrays
 	if (image1->nChannels == 1) {
 		for (int y = 0; y < image1->height; y++) {
 			for (int x = 0; x < image1->width; x++) {
@@ -57,6 +68,7 @@ int compareIplImage(IplImage *image1, IplImage *image2, int tolerance) {
 			}
 		}
 	}
+	
 	if (image1->nChannels == 3) {
 		for (int y = 0; y < image1->height; y++) {
 			for (int x = 0; x < image1->width; x++) {

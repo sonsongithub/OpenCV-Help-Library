@@ -1888,9 +1888,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326639930.14420801</real>
-		<string>{627, 2565}</string>
-		<string>{5333, 0}</string>
+		<real>326643530.165627</real>
+		<string>{2836, 1275}</string>
+		<string>{2306, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1984,9 +1984,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326642874.61093301</real>
-		<string>{12707, 1702}</string>
-		<string>{1864, 0}</string>
+		<real>326643349.77314198</real>
+		<string>{11727, 1303}</string>
+		<string>{14204, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2867,7 +2867,7 @@
 				<integer>241</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>326642867.77826297</real>
+			<real>326643526.09081298</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -2878,7 +2878,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 23:07</string>
+		<string>Today at 23:18</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
@@ -2961,7 +2961,7 @@
 				<integer>247</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary.m</string>
+		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary/test.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2979,7 +2979,7 @@
 				<integer>249</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary.h</string>
+		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2997,7 +2997,7 @@
 				<integer>251</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary/test.m</string>
+		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3290,7 +3290,7 @@
 		<string>IDEWorkspaceTabControllerDesignAreaSplitView</string>
 		<string>IDEShowUtilities</string>
 		<string>IDEEditorArea</string>
-		<string>OpenCVHelpLibrary.m</string>
+		<string>test.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3508,7 +3508,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>314</integer>
+					<integer>315</integer>
 				</dict>
 			</array>
 		</dict>
@@ -3568,10 +3568,15 @@
 					<key>CF$UID</key>
 					<integer>313</integer>
 				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>314</integer>
+				</dict>
 			</array>
 		</dict>
 		<string>OpenCVHelpLibrary</string>
-		<string>OpenCVHelpLibrary.m</string>
+		<string>OpenCVHelpLibrary</string>
+		<string>test.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3582,15 +3587,15 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>315</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
 					<integer>316</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>318</integer>
+					<integer>317</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>319</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -3638,7 +3643,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>317</integer>
+					<integer>318</integer>
 				</dict>
 			</array>
 		</dict>
@@ -3657,7 +3662,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>319</integer>
+					<integer>313</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -3665,7 +3670,6 @@
 				</dict>
 			</array>
 		</dict>
-		<string>OpenCVHelpLibrary</string>
 		<string>Supporting Files</string>
 		<dict>
 			<key>$class</key>
@@ -3700,7 +3704,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>319</integer>
+					<integer>313</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -4632,7 +4636,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>313</integer>
+					<integer>314</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -4661,7 +4665,7 @@
 			<key>DocumentLocation</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>420</integer>
+				<integer>421</integer>
 			</dict>
 			<key>DomainIdentifier</key>
 			<dict>
@@ -4696,6 +4700,10 @@
 					<key>CF$UID</key>
 					<integer>418</integer>
 				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>419</integer>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -4707,7 +4715,7 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>313</integer>
+				<integer>314</integer>
 			</dict>
 		</dict>
 		<dict>
@@ -4728,7 +4736,19 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>419</integer>
+				<integer>313</integer>
+			</dict>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>417</integer>
+			</dict>
+			<key>Identifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>420</integer>
 			</dict>
 		</dict>
 		<string>OpenCVHelpLibrary</string>
@@ -4741,22 +4761,13 @@
 			<key>documentURL</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>421</integer>
+				<integer>110</integer>
 			</dict>
 			<key>timestamp</key>
 			<dict>
 				<key>CF$UID</key>
 				<integer>0</integer>
 			</dict>
-		</dict>
-		<dict>
-			<key>$class</key>
-			<dict>
-				<key>CF$UID</key>
-				<integer>25</integer>
-			</dict>
-			<key>NS.string</key>
-			<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary.m</string>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -4821,10 +4832,10 @@
 				</dict>
 			</array>
 		</dict>
-		<real>326642874.61374998</real>
-		<string>{12707, 1702}</string>
-		<string>{1864, 0}</string>
-		<string>@implementation UIImage(OpenCV)</string>
+		<real>326643530.16757399</real>
+		<string>{2836, 1275}</string>
+		<string>{2306, 0}</string>
+		<string>compareIplImage()</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -4843,7 +4854,7 @@
 				<integer>431</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary.m</string>
+		<string>file://localhost/Users/sonson/code/OpenCV-Help-Library/OpenCVHelpLibrary/test.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4975,7 +4986,7 @@
 			<key>$class</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>453</integer>
+				<integer>454</integer>
 			</dict>
 			<key>geniusEditorContextNode</key>
 			<dict>
@@ -4990,14 +5001,14 @@
 			<key>rootLayoutTreeNode</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>450</integer>
+				<integer>451</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>$class</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>452</integer>
+				<integer>453</integer>
 			</dict>
 			<key>children</key>
 			<dict>
@@ -5016,7 +5027,7 @@
 			<key>parent</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>450</integer>
+				<integer>451</integer>
 			</dict>
 		</dict>
 		<dict>
@@ -5028,7 +5039,7 @@
 			<key>DocumentLocation</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>420</integer>
+				<integer>421</integer>
 			</dict>
 			<key>DomainIdentifier</key>
 			<dict>
@@ -5062,7 +5073,23 @@
 					<key>CF$UID</key>
 					<integer>448</integer>
 				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>449</integer>
+				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>$class</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>417</integer>
+			</dict>
+			<key>Identifier</key>
+			<dict>
+				<key>CF$UID</key>
+				<integer>314</integer>
+			</dict>
 		</dict>
 		<dict>
 			<key>$class</key>
@@ -5085,7 +5112,7 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>449</integer>
+				<integer>450</integer>
 			</dict>
 		</dict>
 		<string>OpenCVHelpLibrary</string>
@@ -5093,12 +5120,12 @@
 			<key>$class</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>452</integer>
+				<integer>453</integer>
 			</dict>
 			<key>children</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>451</integer>
+				<integer>452</integer>
 			</dict>
 			<key>contentType</key>
 			<integer>0</integer>

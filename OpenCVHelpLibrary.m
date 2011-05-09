@@ -190,7 +190,6 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageBigEndian(CGImageRef imageRef) {
 	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
 	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
 	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
-	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
 	
 	CGDataProviderRef inputImageProvider = CGImageGetDataProvider(imageRef);
 	
@@ -198,11 +197,10 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageBigEndian(CGImageRef imageRef) {
 	
 	unsigned char *pixelData = (unsigned char *) CFDataGetBytePtr(data);
 	
-	if (bitmapAlphaInfo == kCGImageAlphaNone) 
+	if (bitmapAlphaInfo == kCGImageAlphaNone) {
+		printf("Unexpected alpha type.\n");
 		return NULL;
-	
-	if (byteOrderInfo != kCGBitmapByteOrder32Big)
-		return NULL;
+	}
 	
 	if (bitmapAlphaInfo == kCGImageAlphaFirst || bitmapAlphaInfo == kCGImageAlphaPremultipliedFirst || bitmapAlphaInfo == kCGImageAlphaNoneSkipFirst) {
 		for (int y = 0; y < inputImageHeight; y++) {
@@ -241,7 +239,6 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageLittleEndian(CGImageRef imageRef) 
 	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
 	CGImageAlphaInfo bitmapAlphaInfo = bitmapInfo & kCGBitmapAlphaInfoMask;
 	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
-	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
 	
 	CGDataProviderRef inputImageProvider = CGImageGetDataProvider(imageRef);
 	
@@ -249,11 +246,10 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageLittleEndian(CGImageRef imageRef) 
 	
 	unsigned char *pixelData = (unsigned char *) CFDataGetBytePtr(data);
 	
-	if (bitmapAlphaInfo == kCGImageAlphaNone) 
+	if (bitmapAlphaInfo == kCGImageAlphaNone) {
+		printf("Unexpected alpha type.\n");
 		return NULL;
-	
-	if (byteOrderInfo != kCGBitmapByteOrder32Big)
-		return NULL;
+	}
 	
 	if (bitmapAlphaInfo == kCGImageAlphaFirst || bitmapAlphaInfo == kCGImageAlphaPremultipliedFirst || bitmapAlphaInfo == kCGImageAlphaNoneSkipFirst) {
 		for (int y = 0; y < inputImageHeight; y++) {
@@ -287,12 +283,12 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
 	
 	if (bytesPerPixel != 1 && bytesPerPixel != 2 && bytesPerPixel != 3 && bytesPerPixel != 4) {
-		printf("unsupported image file\n");
+		printf("Not supported image type.\n");
 		return NULL;
 	}
 	
 	if (bitmapInfo == kCGBitmapFloatComponents) {
-		printf("unsupported image file\n");
+		printf("Not supported image type.\n");
 		return NULL;
 	}
 	
@@ -320,8 +316,8 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	if (bytesPerPixel == 1) {
 		return CGCreateIplImageWithGrayScaleCGImage(imageRef);
 	}
-
-	printf("unsupported image file\n");
+	
+	printf("Not supported image type.\n");
 	return NULL;
 }
 
@@ -358,7 +354,7 @@ CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
 		return image;
 	}
 	else {
-		printf("Not supported depth type.\n");
+		printf("Not supported number of channels\n");
 		return NULL;
 	}	
 	return NULL;
