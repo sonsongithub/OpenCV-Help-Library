@@ -176,6 +176,12 @@ void testInCaseSourceIsGrayBuffer() {
 	else {
 		printf("->Faild\n");
 	}
+	
+	// release all instances
+	CGImageRelease(p);
+	cvReleaseImage(&duplicatedFromCGImage);
+	cvReleaseImage(&duplicatedFromUIImage);
+	cvReleaseImage(&originalSourceImage);
 }
 
 void testInCaseSourceIsRGBBuffer() {
@@ -250,6 +256,12 @@ void testInCaseSourceIsRGBBuffer() {
 	else {
 		printf("->Faild\n");
 	}
+	
+	// release all instances
+	CGImageRelease(p);
+	cvReleaseImage(&duplicatedFromCGImage);
+	cvReleaseImage(&duplicatedFromUIImage);
+	cvReleaseImage(&originalSourceImage);
 }
 
 void test() {
