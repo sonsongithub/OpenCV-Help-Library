@@ -41,3 +41,11 @@
 
 IplImage* CGCreateIplImageWithCGImage(CGImageRef inputImageRef);
 CGImageRef CGCreateImageWithIplImage(IplImage* inputImage);
+
+// #define CV_LOAD_IMAGE_UNCHANGED  -1
+#define CV_LOAD_IMAGE_GRAYSCALE   0
+#define CV_LOAD_IMAGE_COLOR       1
+// #define CV_LOAD_IMAGE_ANYDEPTH    2
+#define CV_LOAD_IMAGE_ANYCOLOR    4
+
+IplImage* cvLoadImage(const char* filename, int iscolor);

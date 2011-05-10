@@ -16,6 +16,7 @@
 		141B72041376E2A5008278A1 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141B72021376E2A5008278A1 /* MainWindow.xib */; };
 		141B72071376E2A5008278A1 /* OpenCVHelpLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B72061376E2A5008278A1 /* OpenCVHelpLibraryViewController.m */; };
 		141B720A1376E2A5008278A1 /* OpenCVHelpLibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141B72081376E2A5008278A1 /* OpenCVHelpLibraryViewController.xib */; };
+		143A1D01137904B200442F7A /* QuartzHelpLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 143A1D00137904B200442F7A /* QuartzHelpLibrary.m */; };
 		147A4E891376F57D00732B67 /* OpenCVHelpLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A4E881376F57D00732B67 /* OpenCVHelpLibrary.m */; };
 		147A4E8D1376F5CC00732B67 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E8C1376F5CC00732B67 /* Accelerate.framework */; };
 		147A4E981376F5DD00732B67 /* libopencv_contrib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147A4E8E1376F5DD00732B67 /* libopencv_contrib.a */; };
@@ -56,6 +57,8 @@
 		141B72051376E2A5008278A1 /* OpenCVHelpLibraryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVHelpLibraryViewController.h; sourceTree = "<group>"; };
 		141B72061376E2A5008278A1 /* OpenCVHelpLibraryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenCVHelpLibraryViewController.m; sourceTree = "<group>"; };
 		141B72091376E2A5008278A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OpenCVHelpLibraryViewController.xib; sourceTree = "<group>"; };
+		143A1CFF137904B200442F7A /* QuartzHelpLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuartzHelpLibrary.h; path = "../Quartz-Help-Library/QuartzHelpLibrary.h"; sourceTree = "<group>"; };
+		143A1D00137904B200442F7A /* QuartzHelpLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuartzHelpLibrary.m; path = "../Quartz-Help-Library/QuartzHelpLibrary.m"; sourceTree = "<group>"; };
 		147A4E871376F57D00732B67 /* OpenCVHelpLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVHelpLibrary.h; sourceTree = "<group>"; };
 		147A4E881376F57D00732B67 /* OpenCVHelpLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenCVHelpLibrary.m; sourceTree = "<group>"; };
 		147A4E8C1376F5CC00732B67 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -114,6 +117,7 @@
 				147A4E871376F57D00732B67 /* OpenCVHelpLibrary.h */,
 				147A4E881376F57D00732B67 /* OpenCVHelpLibrary.m */,
 				141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */,
+				143A1CFD1379049600442F7A /* Quartz Help Library */,
 				14D85E941378405E004837F8 /* Resources */,
 				147A4E8B1376F5B500732B67 /* Libraries */,
 				141B71EF1376E2A4008278A1 /* Frameworks */,
@@ -168,6 +172,15 @@
 				141B71FD1376E2A5008278A1 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		143A1CFD1379049600442F7A /* Quartz Help Library */ = {
+			isa = PBXGroup;
+			children = (
+				143A1CFF137904B200442F7A /* QuartzHelpLibrary.h */,
+				143A1D00137904B200442F7A /* QuartzHelpLibrary.m */,
+			);
+			name = "Quartz Help Library";
 			sourceTree = "<group>";
 		};
 		147A4E8B1376F5B500732B67 /* Libraries */ = {
@@ -293,6 +306,7 @@
 				141B72071376E2A5008278A1 /* OpenCVHelpLibraryViewController.m in Sources */,
 				147A4E891376F57D00732B67 /* OpenCVHelpLibrary.m in Sources */,
 				147A4EAC1376FC0200732B67 /* test.m in Sources */,
+				143A1D01137904B200442F7A /* QuartzHelpLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -264,6 +264,10 @@ void testInCaseSourceIsRGBBuffer() {
 	cvReleaseImage(&originalSourceImage);
 }
 
+void testLoadImage() {
+	IplImage *original = cvLoadImage([[[NSBundle mainBundle] pathForResource:@"testImageGrayScale.jpg" ofType:nil] UTF8String], CV_LOAD_IMAGE_ANYCOLOR);
+}
+
 void test() {
 	printf("OpenCV Help Library Test\n\n");
 	
@@ -275,4 +279,7 @@ void test() {
 	
 	testInCaseSourceIsGrayBuffer();
 	testInCaseSourceIsRGBBuffer();
+	
+	printf("\n---------->cvLoadImage wrapper test\n");
+	testLoadImage();
 }

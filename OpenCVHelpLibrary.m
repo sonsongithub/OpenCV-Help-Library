@@ -30,6 +30,7 @@
 
 #import "OpenCVHelpLibrary.h"
 
+#import "QuartzHelpLibrary.h"
 #import <opencv/cv.h>
 
 @implementation UIImage(OpenCV)
@@ -356,5 +357,26 @@ CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
 		printf("Not supported number of channels\n");
 		return NULL;
 	}	
+	return NULL;
+}
+
+IplImage* cvLoadImage(const char* filename, int iscolor) {
+	CGImageRef loadedImage = NULL;
+	
+	// load as JPG or PNG file
+	loadedImage = CGImageCreateWithPNGorJPEGFilePath((CFStringRef)[NSString stringWithUTF8String:filename]);
+	
+	/*
+	 open other foramat, loading method here....
+	*/
+	
+	// error
+	if (loadedImage == NULL) {
+		printf("Error, can't open file, not supported file format.\n");
+		return NULL;
+	}
+	
+	
+	
 	return NULL;
 }
