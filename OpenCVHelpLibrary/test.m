@@ -265,7 +265,7 @@ void testInCaseSourceIsRGBBuffer() {
 }
 
 void testLoadImage() {
-	IplImage *original = cvLoadImage([[[NSBundle mainBundle] pathForResource:@"testImageGrayScale.jpg" ofType:nil] UTF8String], CV_LOAD_IMAGE_ANYCOLOR);
+	IplImage *original = cvLoadImage([[[NSBundle mainBundle] pathForResource:@"testImage_Gray_JPG24.jpg" ofType:nil] UTF8String], CV_LOAD_IMAGE_ANYCOLOR);
 }
 
 void test() {

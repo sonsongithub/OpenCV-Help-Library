@@ -37,8 +37,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	UIImage *testImageGray = [UIImage imageNamed:@"testImageGrayScale.jpg"];
-	UIImage *testImageRGB = [UIImage imageNamed:@"testImageRGB.jpg"];
+	UIImage *testImageGray = [UIImage imageNamed:@"testImage_Gray_JPG24.jpg"];
+	UIImage *testImageRGB = [UIImage imageNamed:@"testImage_RGB_JPG24.jpg"];
 	
 	IplImage *testIplImageGray = [testImageGray createIplImage];
 	IplImage *testIplImageRGB = [testImageRGB createIplImage];

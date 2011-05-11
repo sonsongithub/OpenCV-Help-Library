@@ -54,7 +54,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">testImageGrayScale.jpg</string>
+							<string key="NSResourceName">testImage_Gray_JPG24.jpg</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="58730277">
@@ -68,7 +68,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">testImageRGB.jpg</string>
+							<string key="NSResourceName">testImage_RGB_JPG24.jpg</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="870561807">
@@ -347,8 +347,8 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>testImageGrayScale.jpg</string>
-				<string>testImageRGB.jpg</string>
+				<string>testImage_Gray_JPG24.jpg</string>
+				<string>testImage_RGB_JPG24.jpg</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
