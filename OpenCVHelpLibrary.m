@@ -275,6 +275,10 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageLittleEndian(CGImageRef imageRef) 
 	return targetImage;
 }
 
+#define _USE_OLD
+
+#ifdef _USE_OLD
+
 IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
 	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
@@ -320,6 +324,62 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	printf("Not supported image type.\n");
 	return NULL;
 }
+
+#else
+
+IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
+	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
+	size_t inputBytesPerPixel = bitsPerPixel_imageRef / 8;
+	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
+	
+	if (inputBytesPerPixel != 1 && inputBytesPerPixel != 2 && inputBytesPerPixel != 3 && inputBytesPerPixel != 4) {
+		printf("Not supported image type.\n");
+		return NULL;
+	}
+	
+	if (bitmapInfo == kCGBitmapFloatComponents) {
+		printf("Not supported image type.\n");
+		return NULL;
+	}
+
+	unsigned char *pixel = NULL;
+	int width = 0;
+	int height = 0;
+	int bytesPerPixel = 0;
+	
+	// RGBA, ARGB
+	if (inputBytesPerPixel == 4) {
+		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_ANYCOLOR);
+	}
+	
+	// RGB
+	if (inputBytesPerPixel == 3) {
+		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_COLOR);
+	}
+	
+	// Gray + alpha
+	if (inputBytesPerPixel == 2) {
+		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_ANYCOLOR);
+	}
+	
+	// Gray
+	if (inputBytesPerPixel == 1) {
+		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_GRAYSCALE);
+	}
+	
+	IplImage* output = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, bytesPerPixel);
+	
+	for (int y = 0; y < height; y++) {
+		unsigned char *source = pixel + y * width * bytesPerPixel;
+		unsigned char *destination = (unsigned char*)output->imageData + y * output->widthStep;
+		memcpy(destination, source, sizeof(unsigned char) * width * bytesPerPixel);
+	}
+	
+	return output;
+}
+ 
+#endif
 
 CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
 	if (inputImage->depth != IPL_DEPTH_8U) {
