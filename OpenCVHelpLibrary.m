@@ -366,17 +366,14 @@ IplImage* cvLoadImage(const char* filename, int iscolor) {
 	// load as JPG or PNG file
 	loadedImage = CGImageCreateWithPNGorJPEGFilePath((CFStringRef)[NSString stringWithUTF8String:filename]);
 	
-	/*
-	 open other foramat, loading method here....
-	*/
+	if (loadedImage == NULL) {
+		// open other foramat, loading method here....
+	}
 	
 	// error
 	if (loadedImage == NULL) {
 		printf("Error, can't open file, not supported file format.\n");
 		return NULL;
 	}
-	
-	
-	
 	return NULL;
 }

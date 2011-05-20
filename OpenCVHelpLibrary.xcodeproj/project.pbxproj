@@ -130,11 +130,11 @@
 		141B71E11376E2A4008278A1 = {
 			isa = PBXGroup;
 			children = (
-				14A3CE79137A4D67008001DD /* testImages */,
 				147A4E871376F57D00732B67 /* OpenCVHelpLibrary.h */,
 				147A4E881376F57D00732B67 /* OpenCVHelpLibrary.m */,
 				141B71F61376E2A5008278A1 /* OpenCVHelpLibrary */,
 				143A1CFD1379049600442F7A /* Quartz Help Library */,
+				14A3CE79137A4D67008001DD /* testImages */,
 				14D85E941378405E004837F8 /* Resources */,
 				147A4E8B1376F5B500732B67 /* Libraries */,
 				141B71EF1376E2A4008278A1 /* Frameworks */,
