@@ -271,12 +271,6 @@ void testLoadImage() {
 void test() {
 	printf("OpenCV Help Library Test\n\n");
 	
-	printf("---------->test\n");
-	printf("- (IplImage*)createIplImage;\n");
-	printf("+ (UIImage*)imageWithIplImage:(IplImage*)inputImage;\n");
-	printf("IplImage* CGCreateIplImageWithCGImage(CGImageRef inputImageRef);\n");
-	printf("CGImageRef CGCreateImageWithIplImage(IplImage* inputImage);\n");
-	
 	testInCaseSourceIsGrayBuffer();
 	testInCaseSourceIsRGBBuffer();
 	
