@@ -30,250 +30,105 @@
 
 #import "test.h"
 
-#import "OpenCVHelpLibrary.h"
+#import "testTool.h"
 
-int compareIplImage(IplImage *image1, IplImage *image2, int tolerance) {
-	// check both image types
-	if (image1->width != image2->width) {
-		printf("Width not matched.\n");
-		return 0;
-	}
-	if (image1->height != image2->height) {
-		printf("Height not matched.\n");
-		return 0;
-	}
-	if (image1->nChannels != image2->nChannels) {
-		printf("Image channels not matched.\n");
-		return 0;
-	}
-	if (image1->depth != image2->depth) {
-		printf("Image depth type not matched.\n");
-		return 0;
-	}
-	if (image1->nChannels != 1 && image1->nChannels !=3) {
-		printf("Not supported number of channels.\n");
-		return 0;
-	}
-	
-	// compare two pixel arrays
-	if (image1->nChannels == 1) {
-		for (int y = 0; y < image1->height; y++) {
-			for (int x = 0; x < image1->width; x++) {
-				unsigned char b1 = (unsigned char)*(image1->imageData + y * image1->widthStep + x);
-				unsigned char b2 = (unsigned char)*(image2->imageData + y * image2->widthStep + x);
-				if (abs(b1 - b2) > tolerance) {
-					return 0;	
+void makeTestPixelData(unsigned char**pixel, int width, int height, int bytesPerPixel) {
+	unsigned char* p = (unsigned char*)malloc(sizeof(unsigned char) * width * height * bytesPerPixel);
+	// make test pattern
+	if (bytesPerPixel == 1) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if (y <= height / 2 && x <= width / 2) {
+					p[y * width + x] = 0;
 				}
-				
-			}
-		}
-	}
-	
-	if (image1->nChannels == 3) {
-		for (int y = 0; y < image1->height; y++) {
-			for (int x = 0; x < image1->width; x++) {
-				for (int k = 0; k < 3; k++) {
-					unsigned char b1 = (unsigned char)*(image1->imageData + y * image1->widthStep + 3 * x + k);
-					unsigned char b2 = (unsigned char)*(image2->imageData + y * image2->widthStep + 3 * x + k);
-					if (abs(b1 - b2) > tolerance) {
-						return 0;	
-					}
+				if (y <= height / 2 && x > width / 2) {
+					p[y * width + x] = 85;
+				}
+				if (y > height / 2 && x <= width / 2) {
+					p[y * width + x] = 170;
+				}
+				if (y > height / 2 && x > width / 2) {
+					p[y * width + x] = 255;
 				}
 			}
 		}
 	}
-	return 1;
-}
-
-void dumpIplImage(IplImage *image) {
-	// make test pattern
-	
-	if (image->depth != IPL_DEPTH_8U) {
-		printf("Not supported depth type.\n");
-		return;
-	}
-	
-	if (image->nChannels == 1) {
-		for (int y = 0; y < image->height; y++) {
-			for (int x = 0; x < image->width; x++) {
-				printf("%02x ", (unsigned char)image->imageData[y * image->widthStep + x + 0]);
-			}
-			printf("\n");
-		}
-	}
-	if (image->nChannels == 3) {
-		for (int y = 0; y < image->height; y++) {
-			for (int x = 0; x < image->width; x++) {
-				printf("%02x%02x%02x ", (unsigned char)image->imageData[y * image->widthStep + 3 * x + 0], (unsigned char)image->imageData[y * image->widthStep + 3 * x + 1], (unsigned char)image->imageData[y * image->widthStep + 3 * x + 2]);
-			}
-			printf("\n");
-		}
-	}
-
-}
-
-void testInCaseSourceIsGrayBuffer() {
-	printf("\n");
-	printf("Test for pixel arrays(Gray scale) -> IplImage -> CGImage(UIImage) -> IplImage.\n");
-	
-	// original pixel data
-	int originalWidth = 32;
-	int originalHeight = 32;
-	unsigned char* original = (unsigned char*)malloc(sizeof(unsigned char) * originalWidth * originalHeight);
-	
-	// make test pattern
-	for (int y = 0; y < originalHeight; y++) {
-		for (int x = 0; x < originalWidth; x++) {
-			if (y <= originalHeight / 2 && x <= originalWidth / 2) {
-				original[y * originalWidth + x] = 0;
-			}
-			if (y <= originalHeight / 2 && x > originalWidth / 2) {
-				original[y * originalWidth + x] = 85;
-			}
-			if (y > originalHeight / 2 && x <= originalWidth / 2) {
-				original[y * originalWidth + x] = 170;
-			}
-			if (y > originalHeight / 2 && x > originalWidth / 2) {
-				original[y * originalWidth + x] = 255;
+	else if (bytesPerPixel == 3) {
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (y <= height / 2 && x <= width / 2) {
+					p[y * width * 3 + x * 3 + 0] = 255;
+					p[y * width * 3 + x * 3 + 1] = 0;
+					p[y * width * 3 + x * 3 + 2] = 0;
+				}
+				else if (y <= height / 2 && x > width / 2) {
+					p[y * width * 3 + x * 3 + 0] = 0;
+					p[y * width * 3 + x * 3 + 1] = 255;
+					p[y * width * 3 + x * 3 + 2] = 0;
+				}
+				else if (y > height / 2 && x <= width / 2) {
+					p[y * width * 3 + x * 3 + 0] = 0;
+					p[y * width * 3 + x * 3 + 1] = 0;
+					p[y * width * 3 + x * 3 + 2] = 255;
+				}
+				else if (y > height / 2 && x > width / 2) {
+					p[y * width * 3 + x * 3 + 0] = 255;
+					p[y * width * 3 + x * 3 + 1] = 255;
+					p[y * width * 3 + x * 3 + 2] = 255;
+				}
 			}
 		}
 	}
-	
-	// Convert to IplImage(Gray)
-	IplImage* originalSourceImage = cvCreateImage(cvSize(originalWidth, originalHeight), IPL_DEPTH_8U, 1);
-	for (int y = 0; y < originalHeight; y++) {
-		unsigned char *source = original + y * originalWidth;
-		unsigned char *destination = (unsigned char*)originalSourceImage->imageData + y * originalSourceImage->widthStep;
-		memcpy(destination, source, sizeof(unsigned char) * originalWidth);
-	}
-	
-	// Convert to CGImageRef from IplImage
-	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
-	
-	// Convert to IplImage(RGB) from CGImageRef
-	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
-	
-	// confirm
-	printf("->Pixel arrays(Gray scale) -> IplImage -> CGImage -> IplImage.\n");
-	if (compareIplImage(duplicatedFromCGImage, originalSourceImage, 1)) {
-		printf("->OK\n");
-	}
 	else {
-		printf("->Faild\n");
+		
 	}
-	
-	// Convert to UIImage from IplImage
-	UIImage *uiimage = [UIImage imageWithIplImage:originalSourceImage];
-	
-	// Convert to IplImage(RGB) from CGImageRef
-	IplImage *duplicatedFromUIImage =[uiimage createIplImage];
-	
-	// confirm
-	printf("->Pixel arrays(Gray scale) -> IplImage -> UIImage -> IplImage.\n");
-	if (compareIplImage(duplicatedFromUIImage, originalSourceImage, 1)) {
-		printf("->OK\n");
-	}
-	else {
-		printf("->Faild\n");
-	}
-	
-	// release all instances
-	CGImageRelease(p);
-	cvReleaseImage(&duplicatedFromCGImage);
-	cvReleaseImage(&duplicatedFromUIImage);
-	cvReleaseImage(&originalSourceImage);
-}
-
-void testInCaseSourceIsRGBBuffer() {
-	printf("\n");
-	printf("Test for pixel arrays(RGB) -> IplImage -> CGImage(UIImage) -> IplImage.\n");
-	
-	// original pixel data
-	int originalWidth = 32;
-	int originalHeight = 32;
-	unsigned char* original = (unsigned char*)malloc(sizeof(unsigned char) * originalWidth * originalHeight * 3);
-	
-	// make test pattern
-	for (int x = 0; x < originalWidth; x++) {
-		for (int y = 0; y < originalHeight; y++) {
-			if (y <= originalHeight / 2 && x <= originalWidth / 2) {
-				original[y * originalWidth * 3 + x * 3 + 0] = 255;
-				original[y * originalWidth * 3 + x * 3 + 1] = 0;
-				original[y * originalWidth * 3 + x * 3 + 2] = 0;
-			}
-			else if (y <= originalHeight / 2 && x > originalWidth / 2) {
-				original[y * originalWidth * 3 + x * 3 + 0] = 0;
-				original[y * originalWidth * 3 + x * 3 + 1] = 255;
-				original[y * originalWidth * 3 + x * 3 + 2] = 0;
-			}
-			else if (y > originalHeight / 2 && x <= originalWidth / 2) {
-				original[y * originalWidth * 3 + x * 3 + 0] = 0;
-				original[y * originalWidth * 3 + x * 3 + 1] = 0;
-				original[y * originalWidth * 3 + x * 3 + 2] = 255;
-			}
-			else if (y > originalHeight / 2 && x > originalWidth / 2) {
-				original[y * originalWidth * 3 + x * 3 + 0] = 255;
-				original[y * originalWidth * 3 + x * 3 + 1] = 255;
-				original[y * originalWidth * 3 + x * 3 + 2] = 255;
-			}
-		}
-	}
-	
-	// Convert to IplImage(RGB)
-	IplImage* originalSourceImage = cvCreateImage(cvSize(originalWidth, originalHeight), IPL_DEPTH_8U, 3);
-	for (int y = 0; y < originalHeight; y++) {
-		unsigned char *source = original + y * originalWidth * 3;
-		unsigned char *destination = (unsigned char*)originalSourceImage->imageData + y * originalSourceImage->widthStep;
-		memcpy(destination, source, sizeof(unsigned char) * originalWidth * 3);
-	}
-	
-	// Convert to CGImageRef from IplImage
-	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
-	
-	// Convert to IplImage(RGB) from CGImageRef
-	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
-	
-	// confirm
-	printf("->Pixel arrays(RGB) -> IplImage -> CGImage -> IplImage.\n");
-	if (compareIplImage(duplicatedFromCGImage, originalSourceImage, 1)) {
-		printf("->OK\n");
-	}
-	else {
-		printf("->Faild\n");
-	}
-	
-	// Convert to UIImage from IplImage
-	UIImage *uiimage = [UIImage imageWithIplImage:originalSourceImage];
-	
-	// Convert to IplImage(RGB) from CGImageRef
-	IplImage *duplicatedFromUIImage =[uiimage createIplImage];
-	
-	// confirm
-	printf("->Pixel arrays(RGB) -> IplImage -> UIImage -> IplImage.\n");
-	if (compareIplImage(duplicatedFromUIImage, originalSourceImage, 1)) {
-		printf("->OK\n");
-	}
-	else {
-		printf("->Faild\n");
-	}
-	
-	// release all instances
-	CGImageRelease(p);
-	cvReleaseImage(&duplicatedFromCGImage);
-	cvReleaseImage(&duplicatedFromUIImage);
-	cvReleaseImage(&originalSourceImage);
+	*pixel = p;
 }
 
 void testLoadImage() {
 	IplImage *original = cvLoadImage([[[NSBundle mainBundle] pathForResource:@"testImage_Gray_JPG24.jpg" ofType:nil] UTF8String], CV_LOAD_IMAGE_ANYCOLOR);
+	printf("testLoadImage OK\n");
+}
+
+void testIplImageConvert(int bytesPerPixel) {
+	// Original pixel data
+	int width = 32;
+	int height = 32;
+	int tolerance = 2;
+	unsigned char* original = NULL;
+	
+	// Make image data
+	makeTestPixelData(&original, width, height, bytesPerPixel);
+	
+	// Copy pixel array to IplImage(RGB)
+	IplImage* originalSourceImage = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, bytesPerPixel);
+	for (int y = 0; y < height; y++) {
+		unsigned char *source = original + y * width * bytesPerPixel;
+		unsigned char *destination = (unsigned char*)originalSourceImage->imageData + y * originalSourceImage->widthStep;
+		memcpy(destination, source, sizeof(unsigned char) * width * 3);
+	}
+	
+	// Convert to CGImageRef from IplImage
+	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
+	
+	// Convert to IplImage(RGB) from CGImageRef
+	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p);
+	
+	// Test
+	assert(compareIplImage(duplicatedFromCGImage, originalSourceImage, tolerance));
+	
+	// release
+	free(original);
+	CGImageRelease(p);
+	cvReleaseImage(&duplicatedFromCGImage);
+	cvReleaseImage(&originalSourceImage);
+	
+	printf("testIplImageConvert bytesPerPixel=%d OK\n", bytesPerPixel);
 }
 
 void test() {
 	printf("OpenCV Help Library Test\n\n");
 	
-	testInCaseSourceIsGrayBuffer();
-	testInCaseSourceIsRGBBuffer();
-	
-	printf("\n---------->cvLoadImage wrapper test\n");
-	testLoadImage();
+	testIplImageConvert(1);
+	testIplImageConvert(3);
 }

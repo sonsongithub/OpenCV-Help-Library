@@ -47,6 +47,7 @@
 		14D85EA21378405E004837F8 /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E9B1378405E004837F8 /* icon57x57.png */; };
 		14D85EA31378405E004837F8 /* icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D85E9C1378405E004837F8 /* icon72x72.png */; };
 		14E3D37513862EC300097521 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E3D37413862EC300097521 /* test.m */; };
+		14E3D37813862F1400097521 /* testTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E3D37713862F1400097521 /* testTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,8 @@
 		14D85E9C1378405E004837F8 /* icon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72x72.png; sourceTree = "<group>"; };
 		14E3D37313862EC300097521 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		14E3D37413862EC300097521 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
+		14E3D37613862F1400097521 /* testTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testTool.h; sourceTree = "<group>"; };
+		14E3D37713862F1400097521 /* testTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +261,8 @@
 			children = (
 				14E3D37313862EC300097521 /* test.h */,
 				14E3D37413862EC300097521 /* test.m */,
+				14E3D37613862F1400097521 /* testTool.h */,
+				14E3D37713862F1400097521 /* testTool.m */,
 			);
 			name = Test;
 			path = OpenCVHelpLibrary/Test;
@@ -346,6 +351,7 @@
 				147A4E891376F57D00732B67 /* OpenCVHelpLibrary.m in Sources */,
 				143A1D01137904B200442F7A /* QuartzHelpLibrary.m in Sources */,
 				14E3D37513862EC300097521 /* test.m in Sources */,
+				14E3D37813862F1400097521 /* testTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
