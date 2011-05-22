@@ -31,6 +31,7 @@
 #import "test.h"
 
 #import "testTool.h"
+#import "QuartzHelpLibrary.h"
 
 void makeTestPixelData(unsigned char**pixel, int width, int height, int bytesPerPixel) {
 	unsigned char* p = (unsigned char*)malloc(sizeof(unsigned char) * width * height * bytesPerPixel);
@@ -85,8 +86,67 @@ void makeTestPixelData(unsigned char**pixel, int width, int height, int bytesPer
 	*pixel = p;
 }
 
+void testLoadImageWithFileNameAndAttributes(NSString *path, int input, int output) {
+	CGImageRef cgImage = CGImageCreateWithPNGorJPEGFilePath((CFStringRef)path);
+	
+	unsigned char *pixel = NULL;
+	int width = 0;
+	int height = 0;
+	int bytesPerPixel = 0;
+	CGCreatePixelBufferWithImage(cgImage, &pixel, &width, &height, &bytesPerPixel, input);
+	
+	IplImage *original = cvLoadImage([path UTF8String], output);
+	
+	assert(original->depth == IPL_DEPTH_8U);
+	
+	unsigned char* tempIplBuff = (unsigned char*)malloc(sizeof(unsigned char) * original->width * original->height * original->nChannels);
+	
+	for (int y = 0; y < original->height; y++) {
+		unsigned char *destination = (unsigned char*)tempIplBuff + y * original->width * original->nChannels;
+		unsigned char *source = (unsigned char*)original->imageData + y * original->widthStep;
+		memcpy(destination, source, sizeof(unsigned char) * original->width * original->nChannels);
+	}
+	assert(compareBuffers(pixel, tempIplBuff, original->width * original->height * original->nChannels, 2));
+	free(tempIplBuff);
+	free(pixel);
+	CGImageRelease(cgImage);
+	cvReleaseImage(&original);
+}
+
 void testLoadImage() {
-	IplImage *original = cvLoadImage([[[NSBundle mainBundle] pathForResource:@"testImage_Gray_JPG24.jpg" ofType:nil] UTF8String], CV_LOAD_IMAGE_ANYCOLOR);
+	int inputAttr[] = {QH_PIXEL_GRAYSCALE, QH_PIXEL_COLOR, QH_PIXEL_ANYCOLOR};
+	int outputAttr[] = {CV_LOAD_IMAGE_GRAYSCALE, CV_LOAD_IMAGE_COLOR, CV_LOAD_IMAGE_ANYCOLOR};
+	
+	// rgb color scale image file
+	{
+		NSArray *paths = [NSArray arrayWithObjects:
+						  [[NSBundle mainBundle] pathForResource:@"testImage_Gray_PNG24.png" ofType:nil],
+						  [[NSBundle mainBundle] pathForResource:@"testImage_Gray_JPG24.jpg" ofType:nil],
+						  [[NSBundle mainBundle] pathForResource:@"testImage_Gray_PNG24.png" ofType:nil],
+						  [[NSBundle mainBundle] pathForResource:@"testImage_RGB_JPG24.jpg" ofType:nil],
+						  [[NSBundle mainBundle] pathForResource:@"testImage_RGB_PNG24.png" ofType:nil],
+						  nil];
+		for (NSString *path in paths) {
+			printf("%s\n", [path UTF8String]);
+			for (int i = 0; i < 3; i++) {
+				testLoadImageWithFileNameAndAttributes(path, inputAttr[i], outputAttr[i]); 
+			}
+		}
+	}
+	// gray scale image file
+	{
+		NSArray *paths = [NSArray arrayWithObjects:
+						  [[NSBundle mainBundle] pathForResource:@"testImage_Gray_PNG8.png" ofType:nil],
+						  [[NSBundle mainBundle] pathForResource:@"testImage_RGB_PNG8.png" ofType:nil],
+						  nil];
+		for (NSString *path in paths) {
+			printf("%s\n", [path UTF8String]);
+			for (int i = 0; i < 1; i++) {
+				testLoadImageWithFileNameAndAttributes(path, inputAttr[i], outputAttr[i]); 
+			}
+		}
+	}
+	
 	printf("testLoadImage OK\n");
 }
 
@@ -131,4 +191,6 @@ void test() {
 	
 	testIplImageConvert(1);
 	testIplImageConvert(3);
+	
+	testLoadImage();
 }
