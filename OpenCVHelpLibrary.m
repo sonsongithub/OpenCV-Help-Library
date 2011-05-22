@@ -36,7 +36,7 @@
 @implementation UIImage(OpenCV)
 
 - (IplImage*)createIplImage {
-	IplImage *output = CGCreateIplImageWithCGImage(self.CGImage);
+	IplImage *output = CGCreateIplImageWithCGImage2(self.CGImage, CV_LOAD_IMAGE_ANYCOLOR);
 	return output;
 }
 
@@ -275,10 +275,6 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageLittleEndian(CGImageRef imageRef) 
 	return targetImage;
 }
 
-#define _USE_OLD
-
-#ifdef _USE_OLD
-
 IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
 	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
@@ -325,9 +321,7 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 	return NULL;
 }
 
-#else
-
-IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
+IplImage* CGCreateIplImageWithCGImage2(CGImageRef imageRef, int iscolor) {
 	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
 	size_t inputBytesPerPixel = bitsPerPixel_imageRef / 8;
 	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
@@ -342,31 +336,81 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 		printf("Not supported image type.\n");
 		return NULL;
 	}
-
+	
+	int readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+	
+	switch(inputBytesPerPixel) {
+		case QH_BYTES_PER_PIXEL_8BIT:
+			if (iscolor == CV_LOAD_IMAGE_GRAYSCALE) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_COLOR) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_ANYCOLOR) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			goto EXCEPTION;
+			break;
+		case QH_BYTES_PER_PIXEL_16BIT:
+			if (iscolor == CV_LOAD_IMAGE_GRAYSCALE) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_COLOR) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_ANYCOLOR) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			goto EXCEPTION;
+			break;
+		case QH_BYTES_PER_PIXEL_24BIT:
+			if (iscolor == CV_LOAD_IMAGE_GRAYSCALE) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_COLOR) {
+				readTypeFromCGImage = QH_PIXEL_COLOR;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_ANYCOLOR) {
+				readTypeFromCGImage = QH_PIXEL_COLOR;
+				break;
+			}
+			goto EXCEPTION;
+			break;
+		case QH_BYTES_PER_PIXEL_32BIT:
+			if (iscolor == CV_LOAD_IMAGE_GRAYSCALE) {
+				readTypeFromCGImage = QH_PIXEL_GRAYSCALE;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_COLOR) {
+				readTypeFromCGImage = QH_PIXEL_COLOR;
+				break;
+			}
+			else if (iscolor == CV_LOAD_IMAGE_ANYCOLOR) {
+				readTypeFromCGImage = QH_PIXEL_ANYCOLOR;
+				break;
+			}
+			goto EXCEPTION;
+			break;
+		default:
+			break;
+	}
+	
+	
 	unsigned char *pixel = NULL;
 	int width = 0;
 	int height = 0;
 	int bytesPerPixel = 0;
 	
-	// RGBA, ARGB
-	if (inputBytesPerPixel == 4) {
-		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_ANYCOLOR);
-	}
-	
-	// RGB
-	if (inputBytesPerPixel == 3) {
-		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_COLOR);
-	}
-	
-	// Gray + alpha
-	if (inputBytesPerPixel == 2) {
-		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_ANYCOLOR);
-	}
-	
-	// Gray
-	if (inputBytesPerPixel == 1) {
-		CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, QH_PIXEL_GRAYSCALE);
-	}
+	CGCreatePixelBufferWithImage(imageRef, &pixel, &width, &height, &bytesPerPixel, readTypeFromCGImage);
 	
 	IplImage* output = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, bytesPerPixel);
 	
@@ -375,11 +419,11 @@ IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
 		unsigned char *destination = (unsigned char*)output->imageData + y * output->widthStep;
 		memcpy(destination, source, sizeof(unsigned char) * width * bytesPerPixel);
 	}
-	
+	free(pixel);
 	return output;
+EXCEPTION:
+	return NULL;
 }
- 
-#endif
 
 CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
 	if (inputImage->depth != IPL_DEPTH_8U) {
@@ -394,7 +438,7 @@ CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
 		CGColorSpaceRelease(grayColorSpace);
 		return image;
 	}
-	if (inputImage->nChannels == 3) {
+	else if (inputImage->nChannels == 3) {
 		CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
 		
 		unsigned char *rgbPixel = (unsigned char*)malloc(sizeof(unsigned char) * inputImage->width * inputImage->height * 4);
@@ -404,6 +448,25 @@ CGImageRef CGCreateImageWithIplImage(IplImage* inputImage) {
 				rgbPixel[y * inputImage->width * 4 + 4 * x + 0] = inputImage->imageData[y * inputImage->width * 3 + 3 * x + 0];
 				rgbPixel[y * inputImage->width * 4 + 4 * x + 1] = inputImage->imageData[y * inputImage->width * 3 + 3 * x + 1];
 				rgbPixel[y * inputImage->width * 4 + 4 * x + 2] = inputImage->imageData[y * inputImage->width * 3 + 3 * x + 2];
+			}
+		}
+		
+		CGContextRef context = CGBitmapContextCreate(rgbPixel, inputImage->width, inputImage->height, 8, inputImage->width * 4, rgbColorSpace, kCGImageAlphaNoneSkipLast | kCGBitmapByteOrder32Big);
+		CGImageRef image = CGBitmapContextCreateImage(context);
+		CGColorSpaceRelease(rgbColorSpace);
+		free(rgbPixel);
+		return image;
+	}
+	else if (inputImage->nChannels == 4) {
+		CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+		
+		unsigned char *rgbPixel = (unsigned char*)malloc(sizeof(unsigned char) * inputImage->width * inputImage->height * 4);
+		
+		for (int y = 0; y < inputImage->height; y++) {
+			for (int x = 0; x < inputImage->width; x++) {
+				rgbPixel[y * inputImage->width * 4 + 4 * x + 0] = inputImage->imageData[y * inputImage->width * 4 + 4 * x + 0];
+				rgbPixel[y * inputImage->width * 4 + 4 * x + 1] = inputImage->imageData[y * inputImage->width * 4 + 4 * x + 1];
+				rgbPixel[y * inputImage->width * 4 + 4 * x + 2] = inputImage->imageData[y * inputImage->width * 4 + 4 * x + 2];
 			}
 		}
 		
