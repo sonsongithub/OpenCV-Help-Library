@@ -36,7 +36,7 @@
 @implementation UIImage(OpenCV)
 
 - (IplImage*)createIplImage {
-	IplImage *output = CGCreateIplImageWithCGImage2(self.CGImage, CV_LOAD_IMAGE_ANYCOLOR);
+	IplImage *output = CGCreateIplImageWithCGImage(self.CGImage, CV_LOAD_IMAGE_ANYCOLOR);
 	return output;
 }
 
@@ -275,53 +275,7 @@ IplImage* CGCreateIplImageWithRGBAScaleCGImageLittleEndian(CGImageRef imageRef) 
 	return targetImage;
 }
 
-IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef) {
-	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
-	size_t bytesPerPixel = bitsPerPixel_imageRef / 8;
-	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-	bitmapInfo = bitmapInfo & kCGBitmapByteOrderMask;
-	CGBitmapInfo byteOrderInfo = (bitmapInfo & kCGBitmapByteOrderMask);
-	
-	if (bytesPerPixel != 1 && bytesPerPixel != 2 && bytesPerPixel != 3 && bytesPerPixel != 4) {
-		printf("Not supported image type.\n");
-		return NULL;
-	}
-	
-	if (bitmapInfo == kCGBitmapFloatComponents) {
-		printf("Not supported image type.\n");
-		return NULL;
-	}
-	
-	// RGBA, ARGB
-	if (bytesPerPixel == 4) {
-		if (byteOrderInfo == kCGBitmapByteOrder32Big || byteOrderInfo == kCGBitmapByteOrderDefault) {
-			return CGCreateIplImageWithRGBAScaleCGImageBigEndian(imageRef);
-		}
-		else if (byteOrderInfo == kCGBitmapByteOrder32Little || byteOrderInfo == kCGBitmapByteOrder32Host) {
-			return CGCreateIplImageWithRGBAScaleCGImageLittleEndian(imageRef);
-		}
-	}
-	
-	// RGB
-	if (bytesPerPixel == 3) {
-		return CGCreateIplImageWithRGBScaleCGImage(imageRef);
-	}
-	
-	// Gray + alpha
-	if (bytesPerPixel == 2) {
-		return CGCreateIplImageWithGrayAlphaScaleCGImage(imageRef);
-	}
-	
-	// Gray
-	if (bytesPerPixel == 1) {
-		return CGCreateIplImageWithGrayScaleCGImage(imageRef);
-	}
-	
-	printf("Not supported image type.\n");
-	return NULL;
-}
-
-IplImage* CGCreateIplImageWithCGImage2(CGImageRef imageRef, int iscolor) {
+IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef, int iscolor) {
 	size_t bitsPerPixel_imageRef = CGImageGetBitsPerPixel(imageRef);
 	size_t inputBytesPerPixel = bitsPerPixel_imageRef / 8;
 	CGImageAlphaInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);

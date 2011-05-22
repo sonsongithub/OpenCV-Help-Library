@@ -112,7 +112,7 @@ void testIplImageConvert(int bytesPerPixel) {
 	CGImageRef p = CGCreateImageWithIplImage(originalSourceImage);
 	
 	// Convert to IplImage(RGB) from CGImageRef
-	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage2(p, CV_LOAD_IMAGE_COLOR);
+	IplImage *duplicatedFromCGImage = CGCreateIplImageWithCGImage(p, CV_LOAD_IMAGE_COLOR);
 	
 	// Test
 	assert(compareIplImage(duplicatedFromCGImage, originalSourceImage, tolerance));

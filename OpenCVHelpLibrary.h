@@ -39,8 +39,7 @@
 
 @end
 
-IplImage* CGCreateIplImageWithCGImage(CGImageRef inputImageRef);
-IplImage* CGCreateIplImageWithCGImage2(CGImageRef imageRef, int iscolor);
+IplImage* CGCreateIplImageWithCGImage(CGImageRef imageRef, int iscolor);
 CGImageRef CGCreateImageWithIplImage(IplImage* inputImage);
 
 // #define CV_LOAD_IMAGE_UNCHANGED		-1
