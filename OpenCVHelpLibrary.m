@@ -33,8 +33,6 @@
 #import "QuartzHelpLibrary.h"
 #import <opencv/cv.h>
 
-#include "testTool.h"
-
 @implementation UIImage(OpenCV)
 
 - (IplImage*)createIplImage {
